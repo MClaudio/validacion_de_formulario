@@ -34,7 +34,7 @@
                 <input type="text" name="telefono" id="telefono" onkeyup="validarNumeros(event,'errorTelefono',this)">
                 <span class="error" id="errorFechaNac">ERROR</span>
                 <label for="fechaNac">Fecha de nacimiento</label>
-                <input type="text" name="fechaNac" id="fechaNac">
+                <input type="text" name="fechaNac" id="fechaNac" onkeyup="validarFecha('errorFechaNac',this)">
                 <span class="error" id="errorEmail">ERROR</span>
                 <label for="email">Email</label>
                 <input type="text" name="email" id="email" onkeyup="validarCorreo('errorEmail',this)">

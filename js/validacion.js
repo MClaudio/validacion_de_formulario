@@ -1,3 +1,9 @@
+var cedula = false
+var nombre = false
+var apellido = false
+var fecha = false
+var correo = false
+var pass = false
 
 function validarCamposObligatorios() {
     var bandera = false
@@ -8,13 +14,24 @@ function validarCamposObligatorios() {
             elemento.style.border = "1px solid red"
         }
     }
+    console.log("cedula" + cedula)
+    console.log("nombre" + nombre)
+    console.log("apellido" + apellido)
+    console.log("fecha" + fecha)
+    console.log("email" + correo)
+    console.log("pass" + pass)
     if (bandera) {
         alert("Llenar todos los campos")
         return false
-    } else {
+    } else if (cedula == false || nombre == false || apellido == false || fecha == false || correo == false || pass == false) {
+        alert("Corriga los campos")
+        return false
+    }
+    else {
         return true
     }
 }
+
 function validarNumeros(event, label, element) {
     let span = document.getElementById(label)
     let letra = event.which || event.keyCode;
@@ -35,11 +52,13 @@ function validarNumeros(event, label, element) {
 
 function validarCedula(label, element) {
     let span = document.getElementById(label)
-    if (element.value.length > 10) {
+    if (element.value.length != 10) {
         span.innerHTML = "Cedula incorrecta"
         span.style.display = "block"
+        cedula = false
     } else {
         span.style.display = "none"
+        cedula = true
     }
 }
 
@@ -64,11 +83,15 @@ function validarNombres(label, element) {
     if (text.split(" ").length > 2) {
         if (element.id == 'nombre') {
             span.innerHTML = "Nombres incorrectos"
+            nombre = false
         } else {
             span.innerHTML = "Apellidos incorrectos"
+            apellido = false
         }
         span.style.display = "block"
     } else {
+        nombre = true
+        apellido = true
         span.style.display = "none"
     }
 }
@@ -79,12 +102,28 @@ function validarCorreo(label, element) {
     console.log(email.search("@est.ups.edu.ec"))
     if ((email.search("@ups.edu.ec") > 0) || (email.search("@est.ups.edu.ec") > 0)) {
         span.style.display = "none"
+        correo = true
     } else {
         span.innerHTML = "Correo electronico incorrecto"
         span.style.display = "block"
-
+        correo = false
     }
 }
+
+function validarFecha(label, element) {
+    let span = document.getElementById(label)
+    var string = String(element.value);
+    arrayFecha = string.split("/");
+    console.log(arrayFecha)
+    var valor = new Date(arrayFecha[2], arrayFecha[1], arrayFecha[0]);
+    console.log(isNaN(valor))
+    if (isNaN(valor)) {
+        fecha = false
+    } else {
+        fecha = true
+    }
+}
+
 
 function validarPass(label) {
     let span = document.getElementById(label)
@@ -93,7 +132,9 @@ function validarPass(label) {
     if (pass1 != pass2) {
         span.innerHTML = "Las contraseñas no coinciden"
         span.style.display = "block"
+        pass = false
     } else {
         span.style.display = "none"
+        pass = true
     }
 }
