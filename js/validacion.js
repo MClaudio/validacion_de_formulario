@@ -14,12 +14,12 @@ function validarCamposObligatorios() {
             elemento.style.border = "1px solid red"
         }
     }
-    console.log("cedula" + cedula)
-    console.log("nombre" + nombre)
-    console.log("apellido" + apellido)
-    console.log("fecha" + fecha)
-    console.log("email" + correo)
-    console.log("pass" + pass)
+    console.log("cedula: " + cedula)
+    console.log("nombre: " + nombre)
+    console.log("apellido: " + apellido)
+    console.log("fecha: " + fecha)
+    console.log("email: " + correo)
+    console.log("pass: " + pass)
     if (bandera) {
         alert("Llenar todos los campos")
         return false
@@ -65,7 +65,8 @@ function validarCedula(label, element) {
 function validarLetras(event, label, element) {
     let span = document.getElementById(label)
     let letra = event.which || event.keyCode;
-    if (letra >= 65 && letra <= 90 || letra == 32 || letra == 8) {
+    console.log(letra)
+    if (letra >= 65 && letra <= 90 || letra == 32 || letra == 8 || letra == 16) {
         span.style.display = "none"
         validarNombres(label, element)
     } else {
@@ -98,7 +99,6 @@ function validarNombres(label, element) {
 function validarCorreo(label, element) {
     let email = element.value
     let span = document.getElementById(label)
-    //console.log(email.search("@ups.edu.ec")) || email.search("@est.ups.edu.ec") < 0
     console.log(email.search("@est.ups.edu.ec"))
     if ((email.search("@ups.edu.ec") > 0) || (email.search("@est.ups.edu.ec") > 0)) {
         span.style.display = "none"
@@ -119,8 +119,11 @@ function validarFecha(label, element) {
     console.log(isNaN(valor))
     if (isNaN(valor)) {
         fecha = false
+        span.innerHTML = "Fecha incorrecta"
+        span.style.display = "block"
     } else {
         fecha = true
+        span.style.display = "none"
     }
 }
 
